@@ -4,15 +4,15 @@ const app = express()
 const config = require('./config/index')
 const chalk = require('chalk')
 const router = require('./router/index')
-const {debug, info, error} = require('./middlewave/logger')
+const {info} = require('./middlewave/logger')
 
 app.use(router)
-
-debug('hello world')
-info('hello world')
 
 module.exports = app.listen(config.PORT, function(err){
     if(err) throw err
     let {address, port} = this.address()
-    console.log(`info: server started at ${chalk.bgGreen.white('http://' + address + ':' + port)}`)
+    let addr = `server start at http://${address}:${port}`
+
+    info(addr)
+    console.log(`info: server started at ${chalk.bgGreen.white(addr)}`)
 })
